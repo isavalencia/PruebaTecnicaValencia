@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ptcuentabancoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="tarjeta">
+    <Key>
+      <PropertyRef Name="id_tarjeta" />
+    </Key>
+    <Property Name="id_tarjeta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="num_tarjeta" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nombre_cliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="apellido_cliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="saldo_inicial" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="limite_credito" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+    <NavigationProperty Name="transacciones" Relationship="Self.FK__transacci__id_ta__5FB337D6" FromRole="tarjeta" ToRole="transacciones" />
+  </EntityType>
+  <EntityType Name="transaccione">
+    <Key>
+      <PropertyRef Name="id_transaccion" />
+    </Key>
+    <Property Name="id_transaccion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_tarjeta" Type="Int32" Nullable="false" />
+    <Property Name="fecha_transaccion" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="monto" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="tipo_transaccion" Type="Int32" Nullable="false" />
+    <Property Name="num_autorizacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tarjeta" Relationship="Self.FK__transacci__id_ta__5FB337D6" FromRole="transacciones" ToRole="tarjeta" />
+  </EntityType>
+  <Association Name="FK__transacci__id_ta__5FB337D6">
+    <End Role="tarjeta" Type="Self.tarjeta" Multiplicity="1" />
+    <End Role="transacciones" Type="Self.transaccione" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tarjeta">
+        <PropertyRef Name="id_tarjeta" />
+      </Principal>
+      <Dependent Role="transacciones">
+        <PropertyRef Name="id_tarjeta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ptcuentabancoEntities2" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="tarjetas" EntityType="Self.tarjeta" />
+    <EntitySet Name="transacciones" EntityType="Self.transaccione" />
+    <AssociationSet Name="FK__transacci__id_ta__5FB337D6" Association="Self.FK__transacci__id_ta__5FB337D6">
+      <End Role="tarjeta" EntitySet="tarjetas" />
+      <End Role="transacciones" EntitySet="transacciones" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

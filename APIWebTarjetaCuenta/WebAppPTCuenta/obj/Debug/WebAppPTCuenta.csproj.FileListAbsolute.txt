@@ -1,0 +1,2 @@
+C:\Users\Isabel\source\repos\APIWebTarjetaCuenta\WebAppPTCuenta\obj\Debug\WebAppPTCuenta.csproj.CoreCompileInputs.cache
+C:\Users\Isabel\source\repos\APIWebTarjetaCuenta\WebAppPTCuenta\obj\Debug\WebAppPTCuenta.csproj.AssemblyReference.cache

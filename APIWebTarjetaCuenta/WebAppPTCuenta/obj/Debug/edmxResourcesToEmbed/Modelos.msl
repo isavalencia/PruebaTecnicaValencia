@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ptcuentabancoModelStoreContainer" CdmEntityContainer="ptcuentabancoEntities3">
+    <EntitySetMapping Name="tarjetas">
+      <EntityTypeMapping TypeName="ptcuentabancoModel.tarjeta">
+        <MappingFragment StoreEntitySet="tarjeta">
+          <ScalarProperty Name="id_tarjeta" ColumnName="id_tarjeta" />
+          <ScalarProperty Name="num_tarjeta" ColumnName="num_tarjeta" />
+          <ScalarProperty Name="nombre_cliente" ColumnName="nombre_cliente" />
+          <ScalarProperty Name="apellido_cliente" ColumnName="apellido_cliente" />
+          <ScalarProperty Name="saldo_inicial" ColumnName="saldo_inicial" />
+          <ScalarProperty Name="limite_credito" ColumnName="limite_credito" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="transacciones">
+      <EntityTypeMapping TypeName="ptcuentabancoModel.transaccione">
+        <MappingFragment StoreEntitySet="transacciones">
+          <ScalarProperty Name="id_transaccion" ColumnName="id_transaccion" />
+          <ScalarProperty Name="id_tarjeta" ColumnName="id_tarjeta" />
+          <ScalarProperty Name="fecha_transaccion" ColumnName="fecha_transaccion" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="monto" ColumnName="monto" />
+          <ScalarProperty Name="tipo_transaccion" ColumnName="tipo_transaccion" />
+          <ScalarProperty Name="num_autorizacion" ColumnName="num_autorizacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

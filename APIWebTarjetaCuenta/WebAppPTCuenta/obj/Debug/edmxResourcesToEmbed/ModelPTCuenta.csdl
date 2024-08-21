@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ptcuentabancoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tarjeta">
+    <Key>
+      <PropertyRef Name="id_tarjeta" />
+    </Key>
+    <Property Name="id_tarjeta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="num_tarjeta" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nombre_cliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="apellido_cliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="saldo_inicial" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="limite_credito" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="ptcuentabancoEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tarjetas" EntityType="Self.tarjeta" />
+  </EntityContainer>
+</Schema>

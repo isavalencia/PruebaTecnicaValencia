@@ -1,0 +1,58 @@
+﻿@model WebAppPTCuenta.tarjeta
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tarjeta</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.num_tarjeta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.num_tarjeta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre_cliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre_cliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.apellido_cliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.apellido_cliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.saldo_inicial)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.saldo_inicial)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.limite_credito)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.limite_credito)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id_tarjeta }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

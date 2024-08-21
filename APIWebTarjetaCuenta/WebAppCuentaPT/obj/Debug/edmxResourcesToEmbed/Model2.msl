@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ptcuentabancoModel1StoreContainer" CdmEntityContainer="ptcuentabancoEntities2">
+    <EntitySetMapping Name="transacciones">
+      <EntityTypeMapping TypeName="ptcuentabancoModel1.transaccione">
+        <MappingFragment StoreEntitySet="transacciones">
+          <ScalarProperty Name="id_transaccion" ColumnName="id_transaccion" />
+          <ScalarProperty Name="id_tarjeta" ColumnName="id_tarjeta" />
+          <ScalarProperty Name="fecha_transaccion" ColumnName="fecha_transaccion" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="monto" ColumnName="monto" />
+          <ScalarProperty Name="tipo_transaccion" ColumnName="tipo_transaccion" />
+          <ScalarProperty Name="num_autorizacion" ColumnName="num_autorizacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

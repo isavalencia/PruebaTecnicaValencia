@@ -1,0 +1,77 @@
+﻿@model IEnumerable<WebAppCuentaPT.tarjeta>
+
+@{
+    ViewBag.Title = "Index";
+
+    Func<string, string> MaskCardNumber = numTarjeta =>
+    {
+        if (numTarjeta.Length >= 8)
+        {
+            return numTarjeta.Substring(0, 4) + new string('*', numTarjeta.Length - 8) + numTarjeta.Substring(numTarjeta.Length - 4);
+        }
+        return numTarjeta;
+    };
+}
+
+<h2>Listado de Tarjetas</h2>
+
+
+<!--<p>
+    @Html.ActionLink("Create New", "Create")
+</p>-->
+<table class="table">
+    <tr>
+        <th>
+            Número de Tarjeta
+            <!--@Html.DisplayNameFor(model => model.num_tarjeta)-->
+        </th>
+        <th>
+            Nombres
+           <!-- @Html.DisplayNameFor(model => model.nombre_cliente)-->
+        </th>
+        <th>
+            Apellidos
+            <!--@Html.DisplayNameFor(model => model.apellido_cliente)-->
+        </th>
+        <!--
+        <th>
+            @Html.DisplayNameFor(model => model.saldo_inicial)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.limite_credito)
+        </th>-->
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @MaskCardNumber(item.num_tarjeta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombre_cliente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.apellido_cliente)
+            </td>
+            <!--<td>
+                @Html.DisplayFor(modelItem => item.saldo_inicial)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.limite_credito)
+            </td>-->
+            <td>
+                <!-- @Html.ActionLink("Edit", "Edit", new { id = item.id_tarjeta }) |
+                 @Html.ActionLink("Details", "Details", new { id = item.id_tarjeta }) |
+                 @Html.ActionLink("Delete", "Delete", new { id = item.id_tarjeta })-->
+
+                <a href="@Url.Action("Index","EstadoCuenta", new { id = item.id_tarjeta })" class="btn btn-primary" style="border-radius:15px">Estado de Cuenta</a>
+                <a href="@Url.Action("Create","transacciones", new { id = item.id_tarjeta })" class="btn btn-success" style="border-radius: 15px">Registrar Compra</a>
+                <a href="@Url.Action("CreatePago","transacciones", new { id = item.id_tarjeta })" class="btn btn-warning" style="border-radius: 15px">Registrar Pago</a>
+                <a href="@Url.Action("Index","transacciones", new { id = item.id_tarjeta })" class="btn btn-info" style="border-radius: 15px">Transacciones</a>
+            </td>
+        </tr>
+    }
+
+</table>

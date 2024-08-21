@@ -1,0 +1,117 @@
+﻿@model IEnumerable<WebAppCuentaPT.transaccione>
+
+@{
+    ViewBag.Title = "Index";
+    var firstTransaction = Model.FirstOrDefault();
+
+
+    //decimal saldoInicial = firstTransaction?.tarjeta.SaldoInicial ?? 0m; // Supongamos que la tarjeta tiene un saldo inicial
+    /*decimal limite = firstTransaction?.tarjeta.limite_credito ?? 0m; // Limite de la tarjeta
+    decimal totalCargos = Model.Where(t => t.tipo_transaccion == tipo_transaccion.Cargo).Sum(t => t.monto);
+    decimal totalAbonos = Model.Where(t => t.tipo_transaccion == tipo_transaccion.Abono).Sum(t => t.monto);
+    decimal saldoActual = firstTransaction.tarjeta.saldo_inicial + totalCargos - totalAbonos;
+    decimal cuotaMinima = saldoActual * 0.05m; // 5% del saldo actual
+    decimal interesBonificable = saldoActual * 0.25m; // 3% del saldo actual
+    decimal montoTotalAPagar = saldoActual + interesBonificable;
+    decimal montoTotalContadoConIntereses = saldoActual + interesBonificable; // Si no se bonifica el interés
+    decimal saldoDisponible = limite - saldoActual;*/
+
+
+
+    Func<string, string> MaskCardNumber = numTarjeta =>
+    {
+        if (numTarjeta.Length >= 8)
+        {
+            return numTarjeta.Substring(0, 4) + new string('*', numTarjeta.Length - 8) + numTarjeta.Substring(numTarjeta.Length - 4);
+        }
+        return numTarjeta; 
+};
+}
+
+<h2>Estado de Cuenta de TC</h2>
+
+@if (firstTransaction != null)
+{
+    <p>Nombre del Cliente: @firstTransaction.tarjeta.nombre_cliente</p>
+    <p>Número de Tarjeta de Crédito: @MaskCardNumber(firstTransaction.tarjeta.num_tarjeta)</p>
+
+    /*<p>Saldo Actual: @saldoActual.ToString("C")</p>
+    <p>Saldo Disponible: @saldoDisponible.ToString("C")</p>
+    <p>Límite: @limite.ToString("C")</p>
+    <p>Cuota Mínima: @cuotaMinima.ToString("C")</p>
+    <p>Interés Bonificable: @interesBonificable.ToString("C")</p>
+    <p>Monto Total a Pagar: @montoTotalAPagar.ToString("C")</p>
+    <p>Monto Total de Contado con Intereses: @montoTotalContadoConIntereses.ToString("C")</p>*/
+ }
+ else
+ {
+   <p>No hay transacciones disponibles. </p>
+ }
+
+
+<!--@Html.ActionLink("Create New", "Create")-->
+<div></div>
+<table class="table">
+    <tr>
+        <th>
+            Número de Autorización
+            <!-- @Html.DisplayNameFor(model => model.num_autorizacion)-->
+        </th>
+        <th>
+            Fecha
+            <!-- @Html.DisplayNameFor(model => model.fecha_transaccion)-->
+        </th>
+        <th>
+            Descripción
+            <!--  @Html.DisplayNameFor(model => model.descripcion)-->
+        </th>
+        <th>
+            Monto
+            <!-- @Html.DisplayNameFor(model => model.monto)-->
+        </th>
+        <!-- <th>
+         @Html.DisplayNameFor(model => model.tipo_transaccion)
+     </th>-->
+        <!--<th>
+        @Html.DisplayNameFor(model => model.tarjeta.num_tarjeta)
+    </th>-->
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.num_autorizacion)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.fecha_transaccion)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.descripcion)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.monto)
+    </td>
+    <!--<td>
+        @Html.DisplayFor(modelItem => item.tipo_transaccion)
+    </td>-->
+
+    <!--<td>
+        @Html.DisplayFor(modelItem => item.tarjeta.num_tarjeta)
+    </td>-->
+    <!--
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.id_transaccion }) |
+        @Html.ActionLink("Details", "Details", new { id = item.id_transaccion }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.id_transaccion })
+    </td>-->
+</tr>
+    }
+
+</table>
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index", "tarjetas")
+</div>

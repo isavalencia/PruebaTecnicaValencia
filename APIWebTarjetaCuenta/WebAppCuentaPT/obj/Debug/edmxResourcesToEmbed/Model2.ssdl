@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ptcuentabancoModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="transacciones">
+    <Key>
+      <PropertyRef Name="id_transaccion" />
+    </Key>
+    <Property Name="id_transaccion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_tarjeta" Type="int" Nullable="false" />
+    <Property Name="fecha_transaccion" Type="date" Nullable="false" />
+    <Property Name="descripcion" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="monto" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="tipo_transaccion" Type="int" Nullable="false" />
+    <Property Name="num_autorizacion" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="ptcuentabancoModel1StoreContainer">
+    <EntitySet Name="transacciones" EntityType="Self.transacciones" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

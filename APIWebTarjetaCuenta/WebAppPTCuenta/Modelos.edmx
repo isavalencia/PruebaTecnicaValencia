@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ptcuentabancoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tarjeta">
+          <Key>
+            <PropertyRef Name="id_tarjeta" />
+          </Key>
+          <Property Name="id_tarjeta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="num_tarjeta" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="nombre_cliente" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="apellido_cliente" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="saldo_inicial" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="limite_credito" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="transacciones">
+          <Key>
+            <PropertyRef Name="id_transaccion" />
+          </Key>
+          <Property Name="id_transaccion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_tarjeta" Type="int" Nullable="false" />
+          <Property Name="fecha_transaccion" Type="date" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="monto" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="tipo_transaccion" Type="int" Nullable="false" />
+          <Property Name="num_autorizacion" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__transacci__id_ta__5FB337D6">
+          <End Role="tarjeta" Type="Self.tarjeta" Multiplicity="1" />
+          <End Role="transacciones" Type="Self.transacciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tarjeta">
+              <PropertyRef Name="id_tarjeta" />
+            </Principal>
+            <Dependent Role="transacciones">
+              <PropertyRef Name="id_tarjeta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ptcuentabancoModelStoreContainer">
+          <EntitySet Name="tarjeta" EntityType="Self.tarjeta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="transacciones" EntityType="Self.transacciones" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__transacci__id_ta__5FB337D6" Association="Self.FK__transacci__id_ta__5FB337D6">
+            <End Role="tarjeta" EntitySet="tarjeta" />
+            <End Role="transacciones" EntitySet="transacciones" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ptcuentabancoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tarjeta">
+          <Key>
+            <PropertyRef Name="id_tarjeta" />
+          </Key>
+          <Property Name="id_tarjeta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="num_tarjeta" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nombre_cliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apellido_cliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="saldo_inicial" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="limite_credito" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <NavigationProperty Name="transacciones" Relationship="Self.FK__transacci__id_ta__5FB337D6" FromRole="tarjeta" ToRole="transacciones" />
+        </EntityType>
+        <EntityType Name="transaccione">
+          <Key>
+            <PropertyRef Name="id_transaccion" />
+          </Key>
+          <Property Name="id_transaccion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_tarjeta" Type="Int32" Nullable="false" />
+          <Property Name="fecha_transaccion" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="monto" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="tipo_transaccion" Type="Int32" Nullable="false" />
+          <Property Name="num_autorizacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tarjeta" Relationship="Self.FK__transacci__id_ta__5FB337D6" FromRole="transacciones" ToRole="tarjeta" />
+        </EntityType>
+        <Association Name="FK__transacci__id_ta__5FB337D6">
+          <End Role="tarjeta" Type="Self.tarjeta" Multiplicity="1" />
+          <End Role="transacciones" Type="Self.transaccione" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tarjeta">
+              <PropertyRef Name="id_tarjeta" />
+            </Principal>
+            <Dependent Role="transacciones">
+              <PropertyRef Name="id_tarjeta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ptcuentabancoEntities3" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tarjetas" EntityType="Self.tarjeta" />
+          <EntitySet Name="transacciones" EntityType="Self.transaccione" />
+          <AssociationSet Name="FK__transacci__id_ta__5FB337D6" Association="Self.FK__transacci__id_ta__5FB337D6">
+            <End Role="tarjeta" EntitySet="tarjetas" />
+            <End Role="transacciones" EntitySet="transacciones" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ptcuentabancoModelStoreContainer" CdmEntityContainer="ptcuentabancoEntities3">
+          <EntitySetMapping Name="tarjetas">
+            <EntityTypeMapping TypeName="ptcuentabancoModel.tarjeta">
+              <MappingFragment StoreEntitySet="tarjeta">
+                <ScalarProperty Name="id_tarjeta" ColumnName="id_tarjeta" />
+                <ScalarProperty Name="num_tarjeta" ColumnName="num_tarjeta" />
+                <ScalarProperty Name="nombre_cliente" ColumnName="nombre_cliente" />
+                <ScalarProperty Name="apellido_cliente" ColumnName="apellido_cliente" />
+                <ScalarProperty Name="saldo_inicial" ColumnName="saldo_inicial" />
+                <ScalarProperty Name="limite_credito" ColumnName="limite_credito" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="transacciones">
+            <EntityTypeMapping TypeName="ptcuentabancoModel.transaccione">
+              <MappingFragment StoreEntitySet="transacciones">
+                <ScalarProperty Name="id_transaccion" ColumnName="id_transaccion" />
+                <ScalarProperty Name="id_tarjeta" ColumnName="id_tarjeta" />
+                <ScalarProperty Name="fecha_transaccion" ColumnName="fecha_transaccion" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="monto" ColumnName="monto" />
+                <ScalarProperty Name="tipo_transaccion" ColumnName="tipo_transaccion" />
+                <ScalarProperty Name="num_autorizacion" ColumnName="num_autorizacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

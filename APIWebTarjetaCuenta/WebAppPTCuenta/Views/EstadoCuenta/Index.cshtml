@@ -1,0 +1,74 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@model WebAppPTCuenta.Models.EstadoCuenta
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Estado de Cuenta de TC</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h2>Estado de Cuenta de TC</h2>
+    <p><strong>Nombre del Cliente:</strong> @Model.NombreCliente</p>
+    <p><strong>Número de Tarjeta de Crédito:</strong> @Model.NumeroTarjeta</p>
+
+    <table>
+        <tr>
+            <th>Número de Autorización</th>
+            <th>Fecha</th>
+            <th>Descripción</th>
+            <th>Monto</th>
+        </tr>
+        @foreach (var movimiento in Model.Movimientos)
+        {
+<tr>
+    <td>@movimiento.NumeroAutorizacion</td>
+    <td>@movimiento.Fecha.ToString("dd-MM-yyyy")</td>
+    <td>@movimiento.Descripcion</td>
+    <td>@movimiento.Monto.ToString("C")</td>
+</tr>}
+        <tr>
+            <td colspan="4"></td>
+        </tr>
+        <tr>
+            <td colspan="3"><strong>Compras Diciembre</strong></td>
+            <td><strong>@Model.TotalComprasDiciembre.ToString("C")</strong></td>
+        </tr>
+        <tr>
+            <td colspan="3"><strong>Compras Enero</strong></td>
+            <td><strong>@Model.TotalComprasEnero.ToString("C")</strong></td>
+        </tr>
+    </table>
+
+    <p><strong>Saldo Actual:</strong> @Model.SaldoActual.ToString("C")</p>
+    <p><strong>Límite:</strong> @Model.Limite.ToString("C")</p>
+    <p><strong>Interés Bonificable:</strong> @Model.InteresBonificable.ToString("C")</p>
+    <p><strong>Saldo Disponible:</strong> @Model.SaldoDisponible.ToString("C")</p>
+</body>
+</html>
+

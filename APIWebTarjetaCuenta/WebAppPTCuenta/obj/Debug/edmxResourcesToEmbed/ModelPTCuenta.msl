@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ptcuentabancoModelStoreContainer" CdmEntityContainer="ptcuentabancoEntities">
+    <EntitySetMapping Name="tarjetas">
+      <EntityTypeMapping TypeName="ptcuentabancoModel.tarjeta">
+        <MappingFragment StoreEntitySet="tarjeta">
+          <ScalarProperty Name="id_tarjeta" ColumnName="id_tarjeta" />
+          <ScalarProperty Name="num_tarjeta" ColumnName="num_tarjeta" />
+          <ScalarProperty Name="nombre_cliente" ColumnName="nombre_cliente" />
+          <ScalarProperty Name="apellido_cliente" ColumnName="apellido_cliente" />
+          <ScalarProperty Name="saldo_inicial" ColumnName="saldo_inicial" />
+          <ScalarProperty Name="limite_credito" ColumnName="limite_credito" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

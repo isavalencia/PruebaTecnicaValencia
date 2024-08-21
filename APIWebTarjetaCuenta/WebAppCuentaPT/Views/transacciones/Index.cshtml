@@ -1,0 +1,100 @@
+﻿@model IEnumerable<WebAppCuentaPT.transaccione>
+
+@{
+    ViewBag.Title = "Index";
+    var firstTransaction = Model.FirstOrDefault();
+
+
+    Func<string, string> MaskCardNumber = numTarjeta =>
+    {
+        if (numTarjeta.Length >= 8)
+        {
+            return numTarjeta.Substring(0, 4) + new string('*', numTarjeta.Length - 8) + numTarjeta.Substring(numTarjeta.Length - 4);
+        }
+        return numTarjeta; // En caso de que el número sea muy corto para enmascarar
+    };
+}
+
+<h2>Transacciones</h2>
+
+@if (firstTransaction != null)
+{
+    <p>Nombre del Cliente: @firstTransaction.tarjeta.nombre_cliente</p>
+    <p>Número de Tarjeta de Crédito: @MaskCardNumber(firstTransaction.tarjeta.num_tarjeta)</p>
+}
+else
+{
+    <p>No hay transacciones disponibles. </p>
+}
+
+<!--<p>
+    @Html.ActionLink("Create New", "Create")
+</p>-->
+<table class="table">
+    <tr>
+        <th>
+            Número de Autorización
+            <!-- @Html.DisplayNameFor(model => model.num_autorizacion)-->
+        </th>
+        <th>
+            Fecha
+            <!--@Html.DisplayNameFor(model => model.fecha_transaccion)-->
+        </th>
+        <th>
+            Descripción
+            <!-- @Html.DisplayNameFor(model => model.descripcion)-->
+        </th>
+        <th>
+            Cargo
+          <!--  @Html.DisplayNameFor(model => model.monto)-->
+        </th>
+        <td>
+            Abono
+           <!-- @Html.DisplayNameFor(model => model.monto)-->
+        </td>
+        <!--<th>
+        @Html.DisplayNameFor(model => model.tipo_transaccion)
+    </th>-->
+        <!--<th>
+        @Html.DisplayNameFor(model => model.tarjeta.num_tarjeta)
+    </th>-->
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.num_autorizacion)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.fecha_transaccion)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.descripcion)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.monto)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.monto)
+    </td>
+    <!--<td>
+        @Html.DisplayFor(modelItem => item.tipo_transaccion)
+    </td>-->
+    <!--<td>
+        @Html.DisplayFor(modelItem =>  item.tarjeta.num_tarjeta)
+    </td>-->
+    <!--<td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.id_transaccion }) |
+        @Html.ActionLink("Details", "Details", new { id = item.id_transaccion }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.id_transaccion })
+    </td>-->
+</tr>
+    }
+
+</table>
+
+<div>
+    @Html.ActionLink("Back to List", "Index", "tarjetas")
+</div>

@@ -1,0 +1,72 @@
+﻿@model WebAppCuentaPT.transaccione
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>transaccione</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.fecha_transaccion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fecha_transaccion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.monto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.monto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tipo_transaccion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tipo_transaccion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.num_autorizacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.num_autorizacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tarjeta.num_tarjeta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tarjeta.num_tarjeta)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
